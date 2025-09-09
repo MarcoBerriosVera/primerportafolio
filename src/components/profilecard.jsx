@@ -10,6 +10,7 @@ export default function ProfileCard() {
         alt="Tu Foto de Perfil"
         width={200}
         height={200}
+        
       /> 
       <p className={styles.bio}>soy super simpatico, soy lindo pero por dentro :D</p>
       <nav className={styles.socialLinks}>
