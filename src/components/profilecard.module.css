@@ -8,9 +8,10 @@
   margin-top: 2rem;
 }
 
-.profileImage {
+.profileimage {
+  display: block;
+  margin: 0 auto;
   border-radius: 50%;
-  object-fit: cover;
   border: 4px solid #fff;
 }
 
@@ -23,6 +24,7 @@
 
 .socialLinks {
   display: flex;
+  justify-content: center;
   gap: 1rem;
   margin-top: 1.5rem;
 }
