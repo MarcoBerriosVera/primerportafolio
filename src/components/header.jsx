@@ -1,8 +1,11 @@
+import style from './header.module.css';
+
+
 export default function Header() {
   return (
-    <header>
-      <h1>Primer avance</h1>
-      <p>portafolio personal</p>
+    <header className={style.header}>
+      <h1 classname={style.title}>Marco Enrique Berrios Vera</h1>
+      <p>Técnico en soportar gente :D</p>
     </header>
   );
 }
