@@ -1,16 +1,18 @@
 import Image from 'next/image';
+import styles from './ProfileCard.module.css';
 
 export default function ProfileCard() {
   return (
     <section>
       <Image
+        className={styles.profileImage}
         src="/images/logo 3.png" 
         alt="Tu Foto de Perfil"
         width={200}
         height={200}
       /> 
-      <p>soy super simpatico, soy lindo pero por dentro :D</p>
-      <nav>
+      <p className={styles.bio}>soy super simpatico, soy lindo pero por dentro :D</p>
+      <nav className={styles.socialLinks}>
         <a href="www.linkedin.com/in/marco-berrios-vera-40845b103">LinkedIn</a>
         <a href="https://github.com/MarcoBerriosVera">GitHub</a>
       </nav>
