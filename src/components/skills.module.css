@@ -1,0 +1,75 @@
+/* src/app/components/skills/skills.module.css */
+
+.container {
+  padding: 4rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #fff; /* O el color gris claro que uses en los títulos */
+}
+
+.intro {
+  color: #a1a1aa; /* Un gris suave para el subtítulo */
+  margin-bottom: 3rem;
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+/* En pantallas medianas y grandes, usamos 3 columnas */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  background-color: #111; /* O el color de fondo de tus tarjetas actuales */
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #06b6d4; /* Color cian al pasar el mouse */
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #06b6d4; /* El Cyan que usas en los proyectos */
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  color: #e5e7eb; /* Texto blanco/gris claro */
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Opcional: Un bullet point personalizado */
+.listItem::before {
+  content: "▹";
+  color: #06b6d4;
+  margin-right: 8px;
+}

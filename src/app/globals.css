@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap');
+@import "tailwindcss";
+
+:root{
+  --bg-1:#04040a; /* deep navy */
+  --bg-2:#001021; /* darker blue */
+  --edge-gap: 2cm; /* distance from page edge for header and top */
+  --side-deco-width: 60px; /* fixed width of side decorations */
+  --surface: rgba(10,12,18,0.45);
+  --foreground:#e6f7ff;
+  --muted:#9fb7c9;
+  --accent-1:#00f0ff; /* cyan neon */
+  --accent-2:#9b00ff; /* purple neon */
+  --accent-3:#ff4db8; /* pink neon */
+  --glow: rgba(124,58,237,0.16);
+  --card-glass: rgba(5,8,15,0.55);
+}
+
+@media (max-width: 720px) {
+  .appContainer{
+    padding-block-start: 1rem;
+    padding-inline: 1rem;
+    margin: 1.25rem auto;
+  }
+}
+
+/* Body with animated lava background */
+body{
+  background: #0a0a0a;
+  color:var(--foreground);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height:100vh;
+  padding:2rem 1rem;
+  margin:0;
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* Lava glow layer */
+body::before{
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: radial-gradient(circle at 20% 30%, rgba(255,110,60,0.18), transparent 14%),
+              radial-gradient(circle at 80% 70%, rgba(255,150,70,0.14), transparent 16%),
+              linear-gradient(180deg,#1a0707 0%, #2a0d08 30%, #070407 100%);
+  filter: blur(28px) saturate(140%);
+}
+
+/* Flowing lava ribbons */
+body::after{
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(1200px 420px at 10% 20%, rgba(255,110,60,0.08), transparent 28%),
+    radial-gradient(1000px 380px at 90% 80%, rgba(255,160,80,0.07), transparent 34%),
+    linear-gradient(180deg, rgba(255,90,40,0.06), rgba(255,60,30,0.02) 30%, rgba(0,0,0,0.28));
+  background-repeat: repeat;
+  background-size: 200% 160%, 180% 140%, 100% 100%;
+  animation: lavaFlow 10s linear infinite;
+  mix-blend-mode: screen;
+  opacity: 0.95;
+}
+
+@keyframes lavaFlow{
+  0%{ background-position: 0% 0%, 0% 0%, 0 0 }
+  25%{ background-position: 30% 20%, 70% 40%, 0 0 }
+  50%{ background-position: 60% 60%, 40% 70%, 0 0 }
+  75%{ background-position: 30% 80%, 20% 40%, 0 0 }
+  100%{ background-position: 0% 0%, 0% 0%, 0 0 }
+}
+
+/* Rock container */
+.rock{
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #121217 0%, #0b0a0f 100%);
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow:
+    0 18px 60px rgba(0,0,0,0.6),
+    inset 0 2px 8px rgba(255,255,255,0.02),
+    inset 0 -6px 30px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.03);
+  position: relative;
+  /* allow page to grow/scroll — hiding overflow here can prevent scrollIntoView from working */
+  overflow: visible;
+}
+
+.rock::before{
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 20% 10%, rgba(255,255,255,0.012), transparent 10%),
+                    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.01), transparent 8%);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.rock::after{
+  content: '';
+  position: absolute;
+  left: -8%;
+  right: -8%;
+  top: -30%;
+  bottom: -30%;
+  background: radial-gradient(closest-side, rgba(255,100,48,0.10), rgba(255,60,30,0.02) 40%, transparent 60%);
+  filter: blur(48px) saturate(130%);
+  z-index: -1;
+}
+
+/* Floating embers */
+body .lava-embers{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image: radial-gradient(circle at 10% 20%, rgba(255,200,120,0.06) 0.6px, transparent 0.8px),
+                    radial-gradient(circle at 80% 70%, rgba(255,150,80,0.04) 0.6px, transparent 0.9px);
+  background-size: 8% 8%, 6% 6%;
+  animation: embersDrift 18s linear infinite;
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+
+@keyframes embersDrift{
+  0%{ background-position: 0% 0%, 0% 0% }
+  50%{ background-position: 30% 40%, 60% 20% }
+  100%{ background-position: 0% 0%, 0% 0% }
+}
+
+/* Content inside rock */
+.rock .appContainer{
+  background: transparent;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.rock h1, .rock h2, .rock p{ color: #e9eef8 }
+
+/* Subtle animated background glow */
+.bg-anim:before{
+  content:'';
+  position:fixed;
+  left:-20%;
+  top:-30%;
+  width:140%;
+  height:160%;
+  background: conic-gradient(from 0deg at 50% 50%, rgba(155,0,255,0.06), rgba(0,240,255,0.04), rgba(255,77,184,0.03), transparent);
+  filter: blur(60px);
+  opacity:0.9;
+  animation: bgShift 18s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes bgShift{
+  0%{transform:rotate(0deg) translateX(0)}
+  50%{transform:rotate(180deg) translateX(6%)}
+  100%{transform:rotate(360deg) translateX(0)}
+}
+
+.appContainer{
+  width:100%;
+  max-width:1100px;
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+  align-items:stretch;
+  padding:2rem;
+  padding-block-start: var(--edge-gap);
+  padding-inline: calc(var(--side-deco-width) + var(--edge-gap));
+  margin:2.5rem auto;
+}

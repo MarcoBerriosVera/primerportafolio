@@ -1,0 +1,20 @@
+<svg width="100" height="100%" viewBox="0 0 100 1000" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <rect x="10" y="10" width="80" height="980" rx="30" fill="url(#grad)" opacity="0.13"/>
+  <g>
+    <polyline points="50,40 50,200 20,300 80,400 50,600" stroke="#00f0ff" stroke-width="3" fill="none">
+      <animate attributeName="points" values="50,40 50,200 20,300 80,400 50,600;50,60 50,220 20,320 80,420 50,620;50,40 50,200 20,300 80,400 50,600" dur="3s" repeatCount="indefinite"/>
+    </polyline>
+    <circle cx="50" cy="120" r="12" fill="#9b00ff">
+      <animate attributeName="cy" values="120;180;120" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <rect x="30" y="800" width="40" height="40" rx="8" fill="#00f0ff">
+      <animate attributeName="y" values="800;900;800" dur="2.5s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="100" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00f0ff"/>
+      <stop offset="1" stop-color="#9b00ff"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// prisma/schema.prisma
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?  // Nuevo campo
+  service   String?  // Nuevo campo
+  message   String
+  createdAt DateTime @default(now())
+}
+
+// Nueva tabla para tu IDS (Sistema de Detección de Intrusos)
+model SecurityLog {
+  id         Int      @id @default(autoincrement())
+  ip         String
+  endpoint   String
+  payload    String   // Guardamos lo que intentaron enviar
+  attackType String   // Ej: "SQL Injection"
+  blocked    Boolean  @default(true)
+  timestamp  DateTime @default(now())
+}
