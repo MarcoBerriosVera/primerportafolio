@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      # AQUÍ ESTÁ LA MAGIA:
+      # Sobreescribimos la DATABASE_URL para que apunte al contenedor 'db'
+      # en lugar de localhost.
+      - DATABASE_URL=postgresql://postgres:password123@db:5432/mi_portafolio_db
+      
+      # Forzamos a Next.js a escuchar en todas las interfaces dentro de Docker
+      - HOSTNAME=0.0.0.0 
+
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: mi_portafolio_db
+    ports:
+      - "5434:5432" # Puse 5434 afuera para que no choque si ya tienes Postgres corriendo en tu PC
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
