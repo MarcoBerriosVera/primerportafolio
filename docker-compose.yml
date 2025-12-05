@@ -1,36 +1,48 @@
 version: '3.8'
 
 services:
+  # --- 1. TU APLICACIÓN (NEXT.JS) ---
   app:
     build: .
+    container_name: mi_proyecto_app
     ports:
       - "3000:3000"
     depends_on:
       - db
     environment:
-      # AQUÍ ESTÁ LA MAGIA:
-      # Sobreescribimos la DATABASE_URL para que apunte al contenedor 'db'
-      # en lugar de localhost.
+      # Conexión a la BD
       - DATABASE_URL=postgresql://postgres:password123@db:5432/mi_portafolio_db
-      
-      # Forzamos a Next.js a escuchar en todas las interfaces dentro de Docker
-      - HOSTNAME=0.0.0.0 
-
+      - HOSTNAME=0.0.0.0
     volumes:
-      - .:/app
-      - /app/node_modules
+      - .:/app            # Sincroniza tu código
+      - /app/node_modules # Vol 2: Protege las dependencias de Linux
+      - /app/.next        # Vol 3: ¡LA SOLUCIÓN! Protege el build de producción
 
+  # --- 2. LA BASE DE DATOS (POSTGRES) ---
   db:
     image: postgres:15
+    container_name: mi_proyecto_db
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password123
       POSTGRES_DB: mi_portafolio_db
     ports:
-      - "5434:5432" # Puse 5434 afuera para que no choque si ya tienes Postgres corriendo en tu PC
+      - "5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  # --- 3. PGADMIN (PANEL DE CONTROL) ---
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: mi_proyecto_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
 
 volumes:
   postgres_data:

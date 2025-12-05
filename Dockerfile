@@ -1,27 +1,28 @@
-# 1. Usamos una versión ligera de Node como base
+# 1. Imagen base ligera
 FROM node:18-alpine
 
-# 2. Creamos la carpeta dentro del contenedor donde vivirá tu app
+# 2. Carpeta de trabajo
 WORKDIR /app
 
-# 3. Copiamos los archivos de definición de paquetes primero
-# (Esto es un truco de Docker para que la instalación sea más rápida si no cambian las dependencias)
+# 3. Copiar dependencias
 COPY package*.json ./
-
-# 4. Copiamos la carpeta de prisma para poder generar el cliente
 COPY prisma ./prisma/
 
-# 5. Instalamos las dependencias
+# 4. Instalar librerías
 RUN npm install
 
-# 6. IMPORTANTE: Generamos el cliente de Prisma para Linux (el entorno del contenedor)
+# 5. Generar cliente de BD
 RUN npx prisma generate
 
-# 7. Copiamos el resto del código de tu proyecto
+# 6. Copiar código fuente
 COPY . .
 
-# 8. Exponemos el puerto (Ajusta si tu app usa otro, por defecto Next/React suelen usar 3000)
+# 7. CONSTRUIR (Aquí usa el script "build" de tu package.json)
+# Al quitarle --turbopack, esto será mucho más estable en Docker
+RUN npm run build
+
+# 8. Puerto
 EXPOSE 3000
 
-# 9. El comando para iniciar la app en modo desarrollo
-CMD ["npm", "run", "dev"]
+# 9. INICIAR EN PRODUCCIÓN
+CMD ["npm", "start"]
