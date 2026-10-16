@@ -2,7 +2,6 @@
 
 Sitio personal con mi perfil, habilidades y proyectos como Técnico Informático con mención en Ciberseguridad.
 
-Versión publicada: https://primerportafolio-gray.vercel.app
 
 ## Tecnologías
 
