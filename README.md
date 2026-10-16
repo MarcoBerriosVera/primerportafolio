@@ -26,3 +26,12 @@ npm install
 # Crear la base de datos: npx prisma migrate dev.
 
 # Correr el proyecto: npm run dev.
+
+## Con Docker
+
+```bash
+cp .env.example .env     # luego edita .env y cambia las claves
+docker compose up --build
+```
+
+`docker-compose.yml` lee las claves desde `.env`. Si falta alguna, Docker se detiene y avisa en vez de usar una clave por defecto. Nunca subas tu `.env` a GitHub.
