@@ -1,11 +1,10 @@
-import styles from './header.module.css';
-
-
 export default function Header() {
   return (
-    <header className={styles.header}>
-      <h1 className={styles.title}>Marco Enrique Berrios Vera</h1>
-      <p>Técnico en soportar gente :D</p>
+    <header className="text-center">
+      <h1 className="text-3xl font-bold sm:text-4xl">Marco Berrios Vera</h1>
+      <p className="mt-2 text-lg opacity-80">
+        Técnico Informático · Ciberseguridad y soporte TI
+      </p>
     </header>
   );
 }
